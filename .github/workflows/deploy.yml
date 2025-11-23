@@ -1,0 +1,37 @@
+name: Deploy to Elastic Beanstalk
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Step 1 - Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Step 2 - Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Step 3 - Install AWS EB CLI
+        run: |
+          pip install awsebcli --upgrade
+
+      - name: Step 4 - Deploy to Elastic Beanstalk
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          AWS_REGION: "us-east-1"
+          EB_APP_NAME: "student-accommodation"
+          EB_ENV_NAME: "student-accommodation-dev"
+        run: |
+          echo "Starting EB Deployment..."
+          eb init $EB_APP_NAME --region $AWS_REGION --platform python-3.9
+          eb deploy $EB_ENV_NAME
+
