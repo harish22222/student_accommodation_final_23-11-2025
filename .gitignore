@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Django
+db.sqlite3
+/media/
+staticfiles/
+.env
+
+# AWS & secrets
+*.pem
+*.key
+*.json
+*.log
+
+# Cloud9 and system
+.c9/
+*.swp
+.DS_Store
+
+# Virtual environment
+env/
+venv/
+
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
