@@ -4,7 +4,7 @@ from botocore.exceptions import ClientError
 def test_send_sns():
     sns_client = boto3.client("sns", region_name="us-east-1")
 
-    topic_arn = "arn:aws:sns:us-east-1:471112797649:BookingNotifications"  # 🧩 your ARN here
+    topic_arn = "arn:aws:sns:us-east-1:471112797649:BookingNotifications" 
 
     subject = "🔔 SNS Test Notification"
     message = "Hello! This is a test SNS message from your Student Accommodation project."

@@ -10,7 +10,7 @@ from accommodation import views as accommodation_views
 
 
 def logout_user(request):
-    """✅ Secure logout that clears cache and invalidates session."""
+    
     logout(request)
     request.session.flush()
     request.session.clear_expired()
@@ -23,7 +23,7 @@ def logout_user(request):
 
 
 def login_redirect_if_authenticated(request):
-    """✅ Redirect logged-in users away from login page."""
+    
     if request.user.is_authenticated:
         return redirect('accommodation:accommodation_list')
     return auth_views.LoginView.as_view(template_name='registration/login.html')(request)

@@ -5,7 +5,7 @@ from studentaccommodationpkg.festival_discount import FestivalDiscountLib
 from decimal import Decimal
 
 
-# 👨‍💼 Owner Model
+# Owner Model
 class Owner(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
@@ -14,7 +14,7 @@ class Owner(models.Model):
         return self.name
 
 
-# 🎉 Festival Discount Model
+# Festival Discount Model
 class FestivalDiscount(models.Model):
     name = models.CharField(max_length=100)
     percentage = models.DecimalField(max_digits=5, decimal_places=2)
@@ -30,7 +30,7 @@ class FestivalDiscount(models.Model):
         return self.active and (self.start_date <= today <= self.end_date)
 
 
-# 🏠 Accommodation Model
+#  Accommodation Model
 class Accommodation(models.Model):
     title = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
@@ -44,7 +44,7 @@ class Accommodation(models.Model):
     def __str__(self):
         return self.title
 
-    # ✅ Fixed: Use correct FestivalDiscountLib() signature
+    
     def get_final_price(self):
         """Calculate discounted price using FestivalDiscountLib"""
         if self.festival_discount and self.festival_discount.is_active():
@@ -55,7 +55,7 @@ class Accommodation(models.Model):
             return Decimal(str(final_price))
         return self.price_per_month
 
-    # ✅ Fixed: Clean Decimal vs float issue
+    
     def get_discount_amount(self):
         """Return only discount amount"""
         if self.festival_discount and self.festival_discount.is_active():
@@ -68,7 +68,7 @@ class Accommodation(models.Model):
         return Decimal('0.00')
 
 
-# 🛠️ Amenity Model
+# ️ Amenity Model
 class Amenity(models.Model):
     name = models.CharField(max_length=100)
 
@@ -76,7 +76,7 @@ class Amenity(models.Model):
         return self.name
 
 
-# 🏡 Room Model
+#  Room Model
 class Room(models.Model):
     accommodation = models.ForeignKey(Accommodation, on_delete=models.CASCADE)
     room_number = models.CharField(max_length=50)
@@ -90,7 +90,7 @@ class Room(models.Model):
         return f"{self.accommodation.title} - Room {self.room_number}"
 
 
-# 👨‍🎓 Student Model
+#  Student Model
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField(blank=True, null=True)
@@ -99,13 +99,13 @@ class Student(models.Model):
         return self.user.username
 
 
-# 📅 Booking Model
+#  Booking Model
 class Booking(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     date_booked = models.DateTimeField(auto_now_add=True)
 
-    # 🧮 Pricing details
+    #  Pricing details
     original_price = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     discount_applied = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     final_price = models.DecimalField(max_digits=8, decimal_places=2, default=0)

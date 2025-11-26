@@ -1,7 +1,3 @@
-"""
-Django settings for studentacc project.
-"""
-
 from pathlib import Path
 import os
 import boto3
@@ -13,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(os.path.join(BASE_DIR, 'studentaccommodationlib', 'src'))
 
 # ============================================================
-# 🔐 1. Load Secrets From AWS Secrets Manager
+#  1. Load Secrets From AWS Secrets Manager
 # ============================================================
 def get_secret(secret_name):
     """Load JSON secret from AWS Secrets Manager (safe fallback)."""
@@ -35,7 +31,7 @@ secrets = get_secret("student-accommodation-secrets")
 
 
 # ============================================================
-# 🔑 2. Security / Base Config
+# 2. Security / Base Config
 # ============================================================
 SECRET_KEY = secrets.get(
     "DJANGO_SECRET_KEY",
@@ -52,7 +48,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 
 # ============================================================
-# 📦 3. Applications
+#  3. Applications
 # ============================================================
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -71,7 +67,7 @@ INSTALLED_APPS = [
 
 
 # ============================================================
-# 🔧 4. Middleware
+# 4. Middleware
 # ============================================================
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -87,7 +83,7 @@ MIDDLEWARE = [
 
 
 # ============================================================
-# 🌐 5. URL/WSGI
+#  5. URL/WSGI
 # ============================================================
 ROOT_URLCONF = "studentacc.urls"
 
@@ -111,7 +107,7 @@ WSGI_APPLICATION = "studentacc.wsgi.application"
 
 
 # ============================================================
-# 🗄️ 6. Database
+# ️ 6. Database
 # ============================================================
 DATABASES = {
     "default": {
@@ -122,7 +118,7 @@ DATABASES = {
 
 
 # ============================================================
-# 🔐 7. Password Validation
+#  7. Password Validation
 # ============================================================
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -133,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # ============================================================
-# 🌍 8. Internationalization
+#  8. Internationalization
 # ============================================================
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
@@ -142,7 +138,7 @@ USE_TZ = True
 
 
 # ============================================================
-# 📁 9. Static & Media (S3) Settings
+#  9. Static & Media (S3) Settings
 # ============================================================
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
@@ -165,7 +161,7 @@ MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
 
 
 # ============================================================
-# 👤 10. Login/Logout
+#  10. Login/Logout
 # ============================================================
 LOGIN_REDIRECT_URL = "accommodation:accommodation_list"
 LOGOUT_REDIRECT_URL = "login"
@@ -173,13 +169,13 @@ LOGIN_URL = "login"
 
 
 # ============================================================
-# 📧 11. Email Backend
+#  11. Email Backend
 # ============================================================
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 # ============================================================
-# 🧁 12. Sessions
+#  12. Sessions
 # ============================================================
 SESSION_ENGINE = "django.contrib.sessions.backends.db"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -194,7 +190,4 @@ CACHE_MIDDLEWARE_SECONDS = 0
 CACHE_MIDDLEWARE_KEY_PREFIX = ""
 
 
-# ============================================================
-# 🎉 ALL SET
-# ============================================================
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

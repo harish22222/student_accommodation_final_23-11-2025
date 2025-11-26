@@ -4,7 +4,7 @@ from .models import FestivalDiscount
 
 
 
-# 🏠 Accommodation Admin
+#  Accommodation Admin
 @admin.register(Accommodation)
 class AccommodationAdmin(admin.ModelAdmin):
     list_display = ('title', 'city', 'price_per_month', 'owner')
@@ -22,28 +22,28 @@ class AccommodationAdmin(admin.ModelAdmin):
         obj.save()
 
 
-# 👨‍🎓 Student Admin
+#  Student Admin
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
     list_display = ('user', 'email')
     search_fields = ('user__username', 'email')
 
 
-# 👨‍💼 Owner Admin
+#  Owner Admin
 @admin.register(Owner)
 class OwnerAdmin(admin.ModelAdmin):
     list_display = ('name', 'email')
     search_fields = ('name', 'email')
 
 
-# 🛠️ Amenity Admin
+# ️ Amenity Admin
 @admin.register(Amenity)
 class AmenityAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
 
 
-# 🏡 Room Admin
+#  Room Admin
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     list_display = ('accommodation', 'room_number', 'status')
@@ -51,7 +51,7 @@ class RoomAdmin(admin.ModelAdmin):
     search_fields = ('accommodation__title', 'room_number')
 
 
-# 📅 Booking Admin
+#  Booking Admin
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
     list_display = ('student', 'room', 'date_booked')

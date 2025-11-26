@@ -5,7 +5,7 @@ class AccommodationConfig(AppConfig):
     name = 'accommodation'
 
     def ready(self):
-        # ✅ Clear all sessions when Django starts
+        # Clear all sessions when Django starts
         from django.contrib.sessions.models import Session
         try:
             Session.objects.all().delete()

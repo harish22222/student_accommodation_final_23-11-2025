@@ -9,13 +9,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}Student Accommodation{% endblock %}</title>
 
-  <!-- ✅ Bootstrap -->
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
-  <!-- ✅ Google Font -->
+  
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 
-  <!-- ✅ Global Theme Styles -->
+  
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -24,7 +24,7 @@
       transition: background-color 0.4s, color 0.4s;
     }
 
-    /* 🔮 Gradient Theme Overrides (replaces Bootstrap blue) */
+    
     :root {
       --primary: #8e44ff;
       --primary-dark: #6c5ce7;
@@ -32,7 +32,7 @@
       --accent-gold: #facc15;
     }
 
-    /* 🌈 Headings & Links */
+    
     h1, h2, h3, h4, h5 {
       color: var(--primary);
       font-weight: 700;
@@ -47,7 +47,7 @@
       color: var(--primary-dark);
     }
 
-    /* 💜 Navbar */
+    
     .navbar {
       background: linear-gradient(90deg, var(--primary-dark), var(--primary));
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -80,7 +80,7 @@
       transition: background-color 0.4s;
     }
 
-    /* ✨ Custom Button Theme (replaces Bootstrap’s blue) */
+    
     .btn-primary, .btn-outline-primary, .btn-view, .btn-book {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
       border: none !important;
@@ -98,7 +98,7 @@
       box-shadow: 0 0 10px rgba(138, 84, 255, 0.6);
     }
 
-    /* 🎨 Card Titles */
+    
     .card-title a {
       color: var(--primary) !important;
     }
@@ -106,7 +106,7 @@
       color: var(--accent-gold) !important;
     }
 
-    /* 🌙 Dark Theme */
+    
     .dark-theme {
       background-color: #0d0d0d;
       color: #e0e0e0;
@@ -149,7 +149,7 @@
       color: #aaa;
     }
 
-    /* 💜 Dark-mode Buttons */
+    
     .dark-theme .btn-primary,
     .dark-theme .btn-outline-primary {
       background: linear-gradient(135deg, var(--primary-light), var(--primary)) !important;
@@ -162,7 +162,7 @@
       box-shadow: 0 0 10px rgba(183, 134, 255, 0.6);
     }
 
-    /* 🌙 Dark-mode Links */
+    
     .dark-theme a {
       color: var(--primary-light);
     }
@@ -182,7 +182,7 @@
 </head>
 
 <body>
-  <!-- ✅ Navbar -->
+  
   <nav class="navbar navbar-expand-lg navbar-dark px-4">
     <div class="container-fluid">
       <a class="navbar-brand fw-bold" href="{% url 'accommodation:accommodation_list' %}">
@@ -204,7 +204,7 @@
             <a href="{% url 'register' %}" class="nav-link fw-bold">Register</a>
           {% endif %}
 
-          <!-- 🌙 Toggle -->
+          
           <div class="form-check form-switch ms-3">
             <input class="form-check-input" type="checkbox" id="themeToggle">
             <label class="form-check-label" for="themeToggle" id="themeLabel">🌙 Dark</label>
@@ -214,19 +214,19 @@
     </div>
   </nav>
 
-  <!-- ✅ Main -->
+  
   <main class="container">
     {% block content %}{% endblock %}
   </main>
 
-  <!-- ✅ Footer -->
+  
   <footer>
     © {{ now|date:"Y" }} Student Accommodation | All rights reserved.
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- 🌙 Theme Toggle Script -->
+  
   <script>
     const toggleSwitch = document.getElementById('themeToggle');
     const themeLabel = document.getElementById('themeLabel');

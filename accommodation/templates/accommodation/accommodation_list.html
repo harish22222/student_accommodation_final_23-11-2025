@@ -4,12 +4,12 @@
 
 {% block content %}
 <style>
-  /* 🌈 Page Background */
+  /*  Page Background */
   body {
     background: linear-gradient(135deg, #f5f3ff 0%, #e9e4ff 100%);
   }
 
-  /* 🏠 Section Title */
+  /*  Section Title */
   h2 {
     color: #8e44ff;
     font-weight: 700;
@@ -17,7 +17,7 @@
     text-shadow: 0 0 10px rgba(142, 68, 255, 0.4);
   }
 
-  /* 🔍 Filter Box */
+  /*  Filter Box */
   .filter-card {
     background: white;
     border-radius: 15px;
@@ -51,7 +51,7 @@
     box-shadow: 0 0 10px rgba(138, 84, 255, 0.6);
   }
 
-  /* 🏡 Accommodation Cards */
+  /*  Accommodation Cards */
   .accommodation-card {
     border-radius: 15px;
     transition: all 0.3s ease;
@@ -86,7 +86,7 @@
     margin-top: 50px;
   }
 
-  /* 🎉 Discount Banner */
+  /*  Discount Banner */
   .discount-banner {
     max-width: 700px;
     margin: auto;
@@ -117,7 +117,7 @@
     position: relative;
   }
 
-  /* 🟣 Custom Buttons */
+  /*  Custom Buttons */
   .btn-outline-primary {
     background: linear-gradient(135deg, #8e44ff, #6c5ce7);
     color: #fff;
@@ -133,7 +133,7 @@
     box-shadow: 0 0 10px rgba(138, 84, 255, 0.6);
   }
 
-  /* 🌙 Dark Mode Styling */
+  /*  Dark Mode Styling */
   body.dark-theme {
     background: #0f0f0f;
   }
@@ -193,7 +193,7 @@
 <div class="container mt-5">
   <h2 class="mb-4">🏡 Available Rooms</h2>
 
-  <!-- 🔍 Filter -->
+  <!--  Filter -->
   <div class="filter-card">
     <form method="get">
       <input type="text" name="q" placeholder="Search by title or description" class="form-control mb-2" value="{{ request.GET.q }}">
@@ -203,7 +203,7 @@
     </form>
   </div>
 
-  <!-- 🎉 Active Discounts -->
+  <!--  Active Discounts -->
   {% if active_discounts %}
     <div class="discount-banner shadow-sm mb-4">
       {% for discount in active_discounts %}
@@ -213,7 +213,7 @@
     </div>
   {% endif %}
 
-  <!-- 🏡 Accommodation Cards -->
+  <!--  Accommodation Cards -->
   <div class="row justify-content-center">
     {% if accommodations %}
       {% for accommodation in accommodations %}

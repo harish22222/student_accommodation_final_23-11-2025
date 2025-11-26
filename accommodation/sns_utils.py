@@ -9,7 +9,7 @@ TOPIC_NAME = "BookingNotifications"
 def get_or_create_topic():
     sns = boto3.client("sns", region_name=REGION_NAME)
 
-    # List existing topics
+    
     topics = sns.list_topics().get("Topics", [])
 
     for t in topics:

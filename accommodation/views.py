@@ -18,22 +18,22 @@ import smtplib
 from datetime import date
 import json
 
-# ✅ Custom discount library
+
 from studentaccommodationpkg.festival_discount import FestivalDiscountLib
 
-# ✅ AWS integrations
+
 from .sns_utils import send_sns_notification
 from .sqs_utils import send_booking_message
 
 
-# 🩺 ✅ Health check endpoint for Elastic Beanstalk
+
 @csrf_exempt
 def health_check(request):
     """AWS Elastic Beanstalk health check endpoint."""
     return HttpResponse("OK", status=200)
 
 
-# ✅ AWS Lambda test API
+# WS Lambda test API
 @csrf_exempt
 def check_room_api(request):
     api_gateway_url = "https://31amd0e7lj.execute-api.us-east-1.amazonaws.com/prod/checkroom"
@@ -47,7 +47,7 @@ def check_room_api(request):
         return JsonResponse({"error": "Failed to connect"}, status=500)
 
 
-# 🏘️ Room list view
+# ️ Room list view
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @never_cache
 @login_required(login_url='login')
@@ -64,7 +64,7 @@ def room_list(request):
         festival_name = None
 
         if acc.festival_discount and acc.festival_discount.is_active():
-            # ✅ Fixed logic
+            
             festival = FestivalDiscountLib()
             discount_percent = acc.festival_discount.percentage
             final_price = festival.apply_discount(original_price, discount_percent)
@@ -84,7 +84,7 @@ def room_list(request):
     return render(request, 'accommodation/room_list.html', {'discounted_rooms': discounted_rooms})
 
 
-# 🏡 Accommodation detail view
+#  Accommodation detail view
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @never_cache
 @login_required(login_url='login')
@@ -97,7 +97,7 @@ def accommodation_detail(request, pk):
     festival_name = None
 
     if accommodation.festival_discount and accommodation.festival_discount.is_active():
-        # ✅ Fixed logic
+        
         festival = FestivalDiscountLib()
         discount_percent = accommodation.festival_discount.percentage
         final_price = festival.apply_discount(original_price, discount_percent)
@@ -118,7 +118,7 @@ def accommodation_detail(request, pk):
     })
 
 
-# ✅ Booking View (SQS + SNS + Email)
+# Booking View (SQS + SNS + Email)
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @never_cache
 @login_required(login_url='login')
@@ -143,14 +143,14 @@ def book_room(request, pk):
     available_room.status = "Booked"
     available_room.save()
 
-    # ✅ Step 1: Send booking info to SQS
+    # Step 1: Send booking info to SQS
     try:
         send_booking_message(booking)
         print("✅ Booking data sent to SQS successfully!")
     except Exception as e:
         print("❌ Failed to send message to SQS:", e)
 
-    # ✅ Step 2: Send admin SNS alert
+    # Step 2: Send admin SNS alert
     try:
         subject = f"📢 New Booking: {accommodation.title}"
         message = (
@@ -165,7 +165,7 @@ def book_room(request, pk):
     except Exception as e:
         print("❌ SNS notification failed:", e)
 
-    # ✅ Step 3: Email confirmation to user
+    # tep 3: Email confirmation to user
     try:
         sender_email = "kharish820414@gmail.com"
         receiver_email = request.user.email
@@ -207,7 +207,7 @@ def book_room(request, pk):
     })
 
 
-# 📘 My Bookings View
+#  My Bookings View
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @never_cache
 @login_required(login_url='login')
@@ -227,7 +227,7 @@ def my_bookings(request):
     return render(request, "accommodation/my_bookings.html", {"bookings": bookings})
 
 
-# 👤 Register View
+#  Register View
 @never_cache
 def register(request):
     if request.method == 'POST':
@@ -255,7 +255,7 @@ def register(request):
     return render(request, 'registration/register.html')
 
 
-# 🖼️ Upload Accommodation Image
+# ️ Upload Accommodation Image
 @login_required(login_url='login')
 def upload_accommodation_image(request, pk):
     accommodation = get_object_or_404(Accommodation, pk=pk)
